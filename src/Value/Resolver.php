@@ -15,13 +15,15 @@ class Resolver implements ResolverInterface
      */
     public function set($model, $attribute, $groups)
     {
-        return $model->$attribute = $groups->map(function($group) {
+        $model->$attribute = $groups->map(function($group) {
             return [
                 'layout' => $group->name(),
                 'key' => $group->key(),
                 'attributes' => $group->getAttributes()
             ];
         });
+
+        return $model->$attribute;
     }
 
     /**
